@@ -10,3 +10,4 @@ for x in fruits:
   print(x) 
 ```
 cybbh day 0 setup
+192.168.65.20, 10.50.26.104 is the linops ip
