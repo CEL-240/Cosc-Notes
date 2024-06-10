@@ -2,6 +2,9 @@
 ## ssh command
 This command will login to our linops as student:
 `ssh student@10.x.x.x -X`
+this is a whatever loop or code 
 ```
-##this is a code block 
+fruits = ["apple", "banana"}
+for x in fruits:
+  print(x) 
 ```
