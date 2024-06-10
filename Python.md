@@ -11,3 +11,19 @@ for x in fruits:
 ```
 cybbh day 0 setup
 192.168.65.20, 10.50.26.104 is the linops ip
+
+$HOME/.vimrc
+
+syntax enable
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set number
+filetype indent on
+set autoindent
+
+$HOME/.nanorc
+
+set tabsize 4
+set tabstospaces
+set linenumbers
