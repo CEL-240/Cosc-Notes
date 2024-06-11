@@ -83,6 +83,15 @@ SPLIT AN EMAIL
   5 part3 = part2.split('.')
   6 
   7 print(part3)
-  '''
+  ''`
 
+
+  ```
+def filtewr.list(l)
+  new_list =[]
+  for x in l:
+    if type(x) != str:
+      new_list.apend(x)
+  return new_list
+```
   
