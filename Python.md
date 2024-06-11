@@ -151,6 +151,7 @@ the statements end in a colon
 if hobbit == 'Sam':
 print(hobbit + ' is wise')
 
+```
 for hobbit in fellowship:
   4     if hobbit == 'sam':
   5         print(hobbit + ' is wise')
@@ -158,8 +159,25 @@ for hobbit in fellowship:
   7         print(hobbit + ' is a tool')
   8     else:
   9         print(hobbit + ' is a hobbitses')
+```
 
 num = 0
-  2 while num <=5:    as lng as its less than 5 it goes and prints up 1
+  2 while num <=5:    as lng as its less than 5 it goes and prints up 1 keep in mind num is 6 but it isnt printed because it broke the loop
   3     prin(num)
   4     num += 1
+
+BREAK AND CONTINUE 
+```
+while True:
+  usr = input('type pass, break, or continue:\n')
+  if usr == 'pass':
+    pass     GOES TO NEXT LINE   
+    print('this is pass")
+  elif usr == 'break':
+    break breaks out the loop or script 
+    print('this is break')
+  elif usr == 'continue':
+    continue doesnt got out of its block but does go back to the loop 
+    print('this is continue')
+  else:
+    print('please choose a better option')
