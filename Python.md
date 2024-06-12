@@ -38,7 +38,7 @@ cybbh python
 
 single and double quotes are literal characters
 
-to get element souts of a list like 'hello world' [0] gives H
+to get element out of a list like 'hello world' [0] gives H
 
 list ('hello world') makes a list 
 
@@ -49,16 +49,16 @@ tuples cant be chnaged but overwritten and gives () when listing
 b[0] = 'j' makes h a j
 
 splitting:
-  a.split('') makes the variable a (hello world) into '[hello', 'world']
+  a.split('') makes the variable a (hello world) into '[hello', 'world'] with a being "hello world"
 
   user:passwd gets split by the : via .split(':')
 
 JOIN 
 
-  a = '@'.join(b)
+  a = '@'.join(b) adds a @ to every char
   does h@e@l@l@o@
 
-hobbits = ['frodo', 'sam', 'tomcat']
+hobbits = ['frodo', 'sam', 'tomcat'] #declares hobbits as an array
 
 frodo would be index 0 sam 1 tom 2
 
@@ -73,7 +73,7 @@ FORMAT
 SPLIT AN EMAIL
 
   '''
-  email = 'name@domain.com'
+  email = 'name@domain.com' declares email as the string in ''
 
   ['name', 'domain', 'com']
   print()
@@ -115,7 +115,7 @@ USE OF APPEND
 input() allows you to type into the function and get tat as a reult, \n gives a new line
 
 ```>> input('do sum')
-do sumoh hell naw
+do sumoh hell naw  #you need to add a space in between m and ' or a newline 
 'oh hell naw'
 >>> var = input('type something:\n')
 type something:
@@ -139,10 +139,10 @@ FLOW CONTROL/LOOPS
 >> for hobbit in fellowship:
 ...     print(hobbit + 'is in the fellowship') hobbit is a created variable and applies to every object in the list
 ... 
-Frodois in the fellowship
-Samis in the fellowship
-Maryis in the fellowship
-Pipis in the fellowship
+Frodo is in the fellowship    #for loops iterate through each item, this code block goes through each name and prints whatever name is in the fellowship
+Sam is in the fellowship
+Mary is in the fellowship
+Pip is in the fellowship
 >>> 
 
 BRANCHING (if elif and else)
@@ -154,7 +154,7 @@ print(hobbit + ' is wise')
 ```
 for hobbit in fellowship:
   4     if hobbit == 'sam':
-  5         print(hobbit + ' is wise')
+  5         print(hobbit + ' is wise') #hobbit is a prev estsablished array
   6     elif hobbit == 'pip':
   7         print(hobbit + ' is a tool')
   8     else:
@@ -163,14 +163,14 @@ for hobbit in fellowship:
 
 num = 0
   2 while num <=5:    as lng as its less than 5 it goes and prints up 1 keep in mind num is 6 but it isnt printed because it broke the loop
-  3     prin(num)
+  3     print(num)
   4     num += 1
 
 BREAK AND CONTINUE 
 ```
 while True:
-  usr = input('type pass, break, or continue:\n')
-  if usr == 'pass':
+  usr = input('type pass, break, or continue:\n') # gives a prompt that reads whats in the ''
+  if usr == 'pass': #if they type any of these
     pass     GOES TO NEXT LINE   
     print('this is pass")
   elif usr == 'break':
@@ -181,3 +181,9 @@ while True:
     print('this is continue')
   else:
     print('please choose a better option')
+
+def digitize(n):
+    num_array = [] # make empty array
+    for number in str(n): # make n into string to interate through 
+        num_array.insert(0, int(number)) # insert number into 1st position (reverses it)
+    return num_array # return array
