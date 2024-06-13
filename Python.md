@@ -680,3 +680,20 @@ def q10():
 if __name__ == '__main__':
     
  pass
+
+# PRINTS MY NAME IN ALL CAPS 
+def get_uppercase_name():
+    return "KYLE"
+
+# Call the function and print the result
+print(get_uppercase_name())
+
+def calculate_cuboid_volume(length, width, height):
+    return length * width * height
+
+# Example usage:
+length = 5
+width = 3  # declares variables the declares a volume variable that uses the cuboid vol function where it launches the bodie mathing 
+height = 2
+volume = calculate_cuboid_volume(length, width, height)
+print(f"The volume of the cuboid is: {volume}")
