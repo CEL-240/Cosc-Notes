@@ -109,7 +109,7 @@ USE OF APPEND
 >>> fellowship.append('Mary')
 >>> fellowship.append('Pip')
 >>> fellowship
-['Frodo', 'Sam', 'Mary', 'Pip']
+['Frodo', 'Sam', 'Mary', 'Pip']ist = each.split(readlines())
 ```
 
 input() allows you to type into the function and get tat as a reult, \n gives a new line
@@ -145,6 +145,7 @@ Mary is in the fellowship
 Pip is in the fellowship
 >>> 
 
+Pass	30	30	
 BRANCHING (if elif and else)
 the statements end in a colon
 
@@ -272,7 +273,7 @@ for key in romanNumerals:
   etc
   
 '''
-3 good syntax for while loops
+# good syntax for while loops
 /usr/bin/env python3
   2 
   3 def guess_number(n):
@@ -284,7 +285,7 @@ for key in romanNumerals:
   9             break
  10          elif guess > n:
  11             print("too high!!!")
- 12             continue
+ 12             continue #continue is not needed due to input being within the loop 
  13          elif guess < n:
  14             print("too low!!!")
  15             continue
@@ -294,18 +295,18 @@ for key in romanNumerals:
 inventory = {'lotr':60.0, 'poke':61, 'stepbros':19} 
   2 order = [('lotr', 4),('poke', 1)]  #these are tuples due to bracket usage 
   3 total = 0
-  4 for i in order:
-  5     print(i[0])
-  6 order[0][0]
+  4 for i in order: #i is for each item, the variable for things 
+  5     print(i[0]) #this would print lotr and poke
+  6 order[0][0] asking what the key is 
   7 'lotr'
-  8 order [0][1]
+  8 order [0][1] #asking the number of copies in the order variable 
   9 4
- 10 order[0][1]*inventory[order[0][0]]
+ 10 order[0][1]*inventory[order[0][0]] # this is saying the price of the copies times the ordered copies 
  11 240.0
  12 
  13 
  14 
- 15 print(inventory['lotr'])
+ 15 print(inventory['lotr']) 
 
  for i in order:
  13     print([i[0]]*i[1]) 
@@ -313,5 +314,87 @@ inventory = {'lotr':60.0, 'poke':61, 'stepbros':19}
  gives the total for order 
  312 just gives the key aka left side and the brackets around i give the value associated to those keys like 60 and 61 for lotr and poke 
  
+# *args
+def myfun(*args):  after seeing *args forgo the *
+  2    total = 0 #total is 0 
+  3    for num in args: 
+  4        print(num) #prints the number
+  5        total += args #at beginning total is 0 and args is 1 so its 1 
+  6    print(total) #also this print is outside the for loop therefore its why the last numbewr is 15
+  7 #result is 1 2 3 4 5 15 
+  8 
+  9 myfun(1,2,3,4,5,)
+
+# file IO
+
+with open("test.txt") as fp: 
+pass
+YOULL USE write(string)
+
+with open("test.exe), "w") as outfile:
+outfile.write('first line\n')
+lines = ['second line\n', 'third line\n', 'last line\n']
+outfile writelines(lines) # when catted will show the words second third and last line
+
+with open("test.exe), "r") as outfile::
+infile.read()
+
+with open("test.exe), "r") as infile:
+infile.read(5) #reads first 5 lines
+infile.readlines()  #reads all the lines
+
+print(line)rintd the lines 
+
+COUNT EACH CHAR
+
+num = 0
+with open('travel_plans.txt') as fp: #opens a txt file as fp then counts the number of characters of the doc with len()
+    num = len(fp.read())
+
+COUNT EACH WORD
+
+num_words = 0 
+with open('emotion_words.txt') as fp:  
+    for each in fp:  
+        something = each.split()  #something is each word
+        num_words+=len(something) len counts only the spaces so hello world is 2 
+
+COUNT NUMBER OF LINES 
+
+num_lines = 0
+with open('school_prompt.txt') as fp:
+    num_lines = len(fp.readlines()) #reads the number of lines and counted by len
+
+FIRST 30 CHARS
+
+beginning_chars = 0
+with open('school_prompt.txt') as fp:
+    beginning_chars = fp.read(30) #read reads all bytes which includes chars
+
+    FIND THIRD WORD IN EVERY LINE 
+  three = []
+    with open('school_prompt.txt as fp:
+      for line in fp:
+        three.append(line.split()[2]) 
+
+      FIRST WORD OF EVERY LINE
+emotions = []
+with open('school_prompt.txt') as fp:
+  for line in fp:
+    emotions.append(line.split()[0])
+
+IF P IS IN A WORD
+
+pwords = []
+with open('school_prompt.txt') as fp:
+  for line in fp:
+    for word in line.split:
+        print(word) 
+          if 'p' in word:
+          pwords.append(word)
 
 
+
+
+
+    
