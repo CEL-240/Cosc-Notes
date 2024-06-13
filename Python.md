@@ -289,8 +289,7 @@ for key in romanNumerals:
  13          elif guess < n:
  14             print("too low!!!")
  15             continue
- 16 guess_number(23)
-'''
+ 16 guess_number(23
 
 inventory = {'lotr':60.0, 'poke':61, 'stepbros':19} 
   2 order = [('lotr', 4),('poke', 1)]  #these are tuples due to bracket usage 
@@ -337,6 +336,7 @@ lines = ['second line\n', 'third line\n', 'last line\n']
 outfile writelines(lines) # when catted will show the words second third and last line
 
 with open("test.exe), "r") as outfile::
+
 infile.read()
 
 with open("test.exe), "r") as infile:
@@ -392,9 +392,144 @@ with open('school_prompt.txt') as fp:
         print(word) 
           if 'p' in word:
           pwords.append(word)
+FIGURE OUT ALSO PRACTICE QUESTIONS
 
 
+ def q1(floatstr):
+  4     '''
+  5     TLO: 112-SCRPY002, LSA 3,4
+  6     Given the floatstr, which is a comma separated string of
+  7     floats, return a list with each of the floats in the 
+  8     argument as elements in the list.'''
+  9     return [float(x) for x in floatstr.split(',')]   the split(',' seperates with commas 
+ 10     pass
 
+def q2(*args):
+ 14     '''
+ 15     TLO: 112-SCRPY006, LSA 3
+ 16     TLO: 112-SCRPY007, LSA 4
+ 17     Given the variable length argument list, return the average
+ 18     of all the arguments as a float
+ 19     '''
+ 20     sum = 0
+ 21     count = 0
+ 22     for n in args:
+ 23         sum += n
+ 24         count += 1
+ 25     return float(sum) / count
+ 26     pass
 
+def q3(lst,n):
+ 29     '''
+ 30     TLO: 112-SCRPY004, LSA 3
+ 31     Given a list (lst) and a number of items (n), return a new 
+ 32     list containing the last n entries in lst.
+ 33     '''
+ 34     return lst[-n:]
+ 35     pass
+ 36 
 
-    
+ def q4(strng):
+ 38     '''
+ 39     TLO: 112-SCRPY004, LSA 1,2
+ 40     TLO: 112-SCRPY006, LSA 3
+ 41     Given an input string, return a list containing the ordinal numbers of 
+ 42     each character in the string in the order found in the input string.
+ 43     '''
+ 44     return [ord(x) for x in list(strng)] the ord(x) is saying for every value in the strng vriable 
+ 45     pass
+
+def q5(strng):
+ 48     '''
+ 49     TLO: 112-SCRPY002, LSA 1,3
+ 50     TLO: 112-SCRPY004, LSA 2
+ 51     Given an input string, return a tuple with each element in the tuple
+ 52     containing a single word from the input string in order.
+ 53     '''
+ 54     return tuple(strng.split())
+ 55     pass
+
+ def q7(filename):
+ 87     '''
+ 88     TLO: 112-SCRPY005, LSA 1
+ 89     Given a filename, open the file and return the length of the first line 
+ 90     in the file excluding the line terminator.
+ 91     '''
+ 92     with open(filename) as fp:
+ 93         return len(fp.readline()) - 1 
+ 94     pass
+
+def q8(filename,lst):
+ 97     '''
+ 98     TLO: 112-SCRPY003, LSA 1
+ 99     TLO: 112-SCRPY004, LSA 1,2
+100     TLO: 112-SCRPY005, LSA 1
+101     Given a filename and a list, write each entry from the list to the file
+102     on separate lines until a case-insensitive entry of "stop" is found in 
+103     the list. If "stop" is not found in the list, write the entire list to 
+104     the file on separate lines.
+105     '''
+106     with open(filename, 'w') as fp:
+107         for item in lst:
+108             if item.lower() == 'stop':
+109                 break
+110             fp.write('{}\n'.format(item))
+111 
+112     pass
+
+def q9(miltime):
+115     '''
+116     TLO: 112-SCRPY003, LSA 1
+117     Given the military time in the argument miltime, return a string 
+118     containing the greeting of the day.
+119     0300-1159 "Good Morning"
+120     1200-1559 "Good Afternoon"
+121     1600-2059 "Good Evening"
+122     2100-0259 "Good Night"
+123     '''
+124     if miltime >= 300 and miltime <= 1159:
+125         return "Good Morning"
+126     elif miltime >= 1200 and miltime <= 1559:
+127         return "Good Afternoon"
+128     elif miltime >= 1600 and miltime <= 2059:
+129         return "Good Evening"
+130     elif miltime >= 2100 and miltime <= 259:
+131         return "Good Night"
+132     pass
+
+def q10(numlist):
+135     '''
+136     TLO: 112-SCRPY003, LSA 1
+137     TLO: 112-SCRPY004, LSA 1
+138     Given the argument numlist as a list of numbers, return True if all 
+139     numbers in the list are NOT negative. If any numbers in the list are
+140     negative, return False.
+141     '''
+142     for i in numlist:
+143         if i < 0:
+144             return False
+145     return True
+146     pass
+
+q6
+Given a dictionary (catalog) whose keys are product names and values are product
+prices per unit and a list of tuples (order) of product names and quantities
+compute and return the total value of the order.
+
+#CODE FOR 6
+print(catalog)
+print(type(catalog))
+print(order)
+print(type(order))
+total = 0 
+for i in order:
+  total += catalog[i[0]]*i[1]
+return total 
+
+.startswith("insert character") shows something that starts with that character 
+type() gives the type of so,ething 
+once *args is seen once the * is ignored and is a basic argument 
+# for <every value> in <variable>:
+  <list>.append/join/
+tuple() makes something a tuple
+.upper, .lower() gives caps or lowers to strings 
