@@ -543,3 +543,5 @@ my_dict = {
     "car": "a vehicle",
     "book": "a source of knowledge"
 }
+
+    return s.replace("!", "") # return is a function that switches something, the first is whats being replaced the second is whats replacing something 
