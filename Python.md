@@ -533,3 +533,13 @@ once *args is seen once the * is ignored and is a basic argument
   <list>.append/join/
 tuple() makes something a tuple
 .upper, .lower() gives caps or lowers to strings 
+
+# An empty dictionary
+my_dict = {}
+
+# A dictionary with some key-value pairs
+my_dict = {
+    "apple": "a fruit",
+    "car": "a vehicle",
+    "book": "a source of knowledge"
+}
