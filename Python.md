@@ -569,7 +569,19 @@ def q2(addr):
 
     parts = addr.split('.')
     if len(parts) != 4:
-        return False  
+        return False    if len(parts) != 4:
+ 23         return False
+ 24 
+ 25     try:
+ 26         octets = [int(part) for part in parts]
+ 27 
+ 28     if 224 <= octets[0] <= 239:
+ 29         return True
+ 30      else:
+ 31         return False
+ 32     except ValueError:
+ 33         return False
+
 
     try:
         octets = [int(part) for part in parts]
@@ -579,7 +591,19 @@ def q2(addr):
         else:
             return False
     except ValueError:
-        return False  
+        return False    if len(parts) != 4:
+ 23         return False
+ 24 
+ 25     try:
+ 26         octets = [int(part) for part in parts]
+ 27 
+ 28     if 224 <= octets[0] <= 239:
+ 29         return True
+ 30      else:
+ 31         return False
+ 32     except ValueError:
+ 33         return False
+
     pass
 
 def q3():
@@ -607,6 +631,9 @@ def q4(number):
     pass
 
 def q5():
+    middle_initial = middle[0] if middle else ""
+    email = f"{first.lower()}.{middle_initial.lower()}.{last.lower()}@{domain.lower()}.com"
+    print(email)
     # Read a string from the user and return the integer conversion of it.
     # Ensure the conversion is successful by removing any non-numeric characters.
     # You may assume that the input will contain at least 1 numeric character.
@@ -697,3 +724,15 @@ width = 3  # declares variables the declares a volume variable that uses the cub
 height = 2
 volume = calculate_cuboid_volume(length, width, height)
 print(f"The volume of the cuboid is: {volume}")
+
+
+def q6(f0, f1)
+diffs = [] 
+linenumber = 0
+with open(f0) as file0:
+  with open(f1) as file1:
+    for l0,l1 in zip(file0,file1):
+      if l0 != l1:
+        diffs.append(linenumber)
+      linenumber+=1
+retuen diffs
