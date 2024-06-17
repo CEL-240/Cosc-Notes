@@ -1,8 +1,8 @@
-## day 1
+## day 1 10.5028.228 for ctf
 less
 
  Pg Down; spacebar; CTRL+V; CTRL+F 	moves down one screen length
- Pg Up; CTRL+B 				move back up one screen length
+ Pg Up; CTRL+B 				move back up one screen lengthgrep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' StoryHiddenIPs | sort | uniq -c | sort -nr
  Down Arrow; ENTER; CTRL+N 		moves down one line at a time
  Up Arrow; CTRL+Y 			moves up one line at a time
  /pattern 				searches FWD for pattern ie: /logs
@@ -10,7 +10,7 @@ less
  / 					repeats previous search
  q 					quit less
  man less 				for more options
-
+grep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' StoryHiddenIPs | sort | uniq -c | sort -nr
 
 
 locate
@@ -450,3 +450,34 @@ sed -i -e 's/ANCHOVIES//g' pizaster.htm
 
 sed -i '/^#/d' /etc/hosts.allow
             removes all lines starting with "#" from file /etc/hosts.allow
+
+# day 2 excersises 
+
+grep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' StoryHiddenIPs | sort | uniq -c | sort -nr #finds ips in a file and sorts them by how many time they appear 
+
+awk -F: '$3 > 3 && $7 == "/bin/bash" {print $1}' $HOME/passwd > $HOME/SED/names.txt ##uses awk to find only the names of system and user accounts that arent UID 0-3 that only display bash shell as their default shell 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
