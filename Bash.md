@@ -470,17 +470,41 @@ sed -e 's/chicken/hmburger/g' -e 's/pepperoni/sausage/' pizza.txt
 words go between '//'
 sed -e 's/chick/ham/g' -e 's/pep/saus/' lel.txt
 
+# commmand substitution
+#!/bin/bash
+A=$(cat /etc/passwd)
+echo $A #this makes A the cat etc passwd 
+
+A=$(find /usr/bin -name passwd)
+echo A$
+
+if [[ banana == apple ]];
+	then echo "banana is n apple"
+else echo "banaan is not an apple";
+fi
+
+Sort
+
+sort                sorts content according to position on the ASCII table
+sort -n             sorts content numerically
+sort -u             sorts content uniqely
+sort -nr            sorts content numerically reversed
+sort -t +
+sort -k 2,4         sorts 1st by content in the 2nd column, then by content in the 4th column
 
 
 
 
 
 
+Uniq
 
+uniq                sorts content uniqely
+uniq -c             sorts content uniqely with a count reading
 
+dmesg | egrep 'CPU|BIOS' |egrep -iv 'usable|reserved' | cut -d ] -f '2-' # finds dmesg kernel messages that have cpu or bios and dont hVE usable or reserved
 
-
-
+sed -n '/\/bin\/sh$/!{/\/bin\/false$/!p}' $HOME/passwd > $HOME/PASS/passwd.txt ##using sed, write all lines from homa passwd into pass passwd that dont end in bin/sh or bin/false
 
 
 
