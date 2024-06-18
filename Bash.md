@@ -9,7 +9,7 @@ less
  ?pattern 				searches BACK for pattern ie: ?logs
  / 					repeats previous search
  q 					quit less
- man less 				for more options
+ man less 				for more optionsFind all dmesg kernel messages that contain CPU or BIOS (uppercase) in the string, but not usable or reserved (case-insensitive)
 grep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' StoryHiddenIPs | sort | uniq -c | sort -nr
 
 
@@ -39,7 +39,7 @@ Process Hierarchy
 
 
 
-ps
+psFind all dmesg kernel messages that contain CPU or BIOS (uppercase) in the string, but not usable or reserved (case-insensitive)
 
  ps -u Jim 		IDs processes use by user: Jim
  ps --forest 		show complete process tree with parent child relationships
@@ -458,11 +458,17 @@ grep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' StoryHiddenIPs | sort | uniq -c | sor
 awk -F: '$3 > 3 && $7 == "/bin/bash" {print $1}' $HOME/passwd > $HOME/SED/names.txt ##uses awk to find only the names of system and user accounts that arent UID 0-3 that only display bash shell as their default shell 
 
 
-
-
-
-
-
+# sed 
+a stream editor utility
+sedexplain.txt> 
+-e expression for many sed patterns
+s substitution for start pattern
+g global lowercase
+d deletes
+s eis end of the line 
+sed -e 's/chicken/hmburger/g' -e 's/pepperoni/sausage/' pizza.txt
+words go between '//'
+sed -e 's/chick/ham/g' -e 's/pep/saus/' lel.txt
 
 
 
