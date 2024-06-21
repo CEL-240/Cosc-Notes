@@ -506,6 +506,52 @@ dmesg | egrep 'CPU|BIOS' |egrep -iv 'usable|reserved' | cut -d ] -f '2-' # finds
 
 sed -n '/\/bin\/sh$/!{/\/bin\/false$/!p}' $HOME/passwd > $HOME/PASS/passwd.txt ##using sed, write all lines from homa passwd into pass passwd that dont end in bin/sh or bin/false
 
+cat /etc/passwd | sort -k4 -t: -n | head -10 | tail -1 | cut -d: -f6 | md5sum | cut -d" " -f1 ## sorts passwd file by guid field and gets the 10th entrys md5, outputs only the md5 hash
+
+files=$(find /bin /sbin /usr/bin /usr/sbin -type f -executable 2>/dev/null | sort | sed -n '10p'); [ -n "$files" ] && md5sum "$files" | cut -d" " -f1
+##
+ind all executable files under the following four directories:
+
+    /bin
+    /sbin
+    /usr/bin
+    /usr/sbin
+
+Sort the filenames with absolute path, and get the md5sum of the 10th file from the top of the lis
+##
+
+find "$HOME" -type f -name "*.bin" -exec dirname {} \; | sort -u  
+##
+sing find, find all files under the $HOME directory with a .bin extension ONLY.
+Once the file(s) and their path(s) have been found, remove the file name from the absolute path output.
+Ensure there is no trailing / at the end of the directory path when outputting to standard output.
+You may need to sort the output depending on the command(s) you use.
+##
+
+mkdir 11{23,34,45,56} #brace expansion makes new dirs such as 1123 
+
+mkdir $HOME/1123
+cd $HOME/1123
+touch {1,2,3,4,5,6~,7~,8~,9~}.txt
+##
+makes new .txt files
+##
+
+find $HOME/1123 -name *.txt -not -name *~* -exec cp {} $HOME/CUT \;
+##copies all files from 1123 with .txt but no ~s and puts them in cut 
+
+find /var -empty -printf "%i %f\n" ## fidns all empty files from var and prints their inode and filename seperated by newlines 
+-inum 4026532575 ## finds file with the inode number 
+
+ls -l $HOME/CUT | cut -d. -f1- -s | cut -d: -f2 | cut -d' ' -f2 > $HOME/CUT/names ##shows all name with extensions nut mo directories, written to a names file and omits names filename from output 
+
+grep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' StoryHiddenIPs | sort | uniq -c | sort -nr ##greps only ips in a file and sorts them uniquely by how many times they appear
+
+awk -F: '$3 > 3 && $7 == "/bin/bash" {print $1}' $HOME/passwd > $HOME/SED/names.txt ##extracts only the names of all system and user accounts that are not uid 0-3, only displays those with bin bash as dewf shell, output to a file names .txt 
+
+
+
+
 
 
 
