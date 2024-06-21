@@ -552,6 +552,142 @@ awk -F: '$3 > 3 && $7 == "/bin/bash" {print $1}' $HOME/passwd > $HOME/SED/names.
 
 
 
+## practice test
+Create a script that will perform the following actions:
+
+    Replace every instance of 'cat' in "infile" with 'dog'.
+    Replace every instance of 'Navy' in "infile" with 'Army'.
+    Replacements are case-sensitive.
+    Write the output to the file specifed by the variable 'outfile'.
+
+
+function q1()
+{
+  #Valid Variables are:
+  infile=$1
+  outfile=$2
+  sed -e 's/cat/dog/g' -e 's/Navy/Army/g' $1 > $2
+}
+
+
+Create a script that will print to standard output all user names from the /etc/passwd file.
+
+function q1()
+{
+  cut -d: -f1 /etc/passwd | sort -r
+}
+
+
+Create a script that will perform the following actions:
+
+    Print to standard output all usernames from the file path specified by the parameter filename sorted ascending numerically by user id.
+    The file will be in the format of /etc/passwd
+
+function q1()
+{
+  #Valid Variables are:
+  filename=$1
+  #!/bin/bash
+
+if [ -z "$1" ]; then
+  echo "Usage: $0 <filename>"
+  exit 1
+fi
+
+Create a script that will perform the following actions:
+
+    Print to standard output the total number of files in the directory specified by dirname.
+    If the directory does not exist, print 'Invalid Directory'
+    The count excludes the '.' and '..' pseudo-directories.
+
+function q1()
+{
+  #Valid Variables are:
+  dirname=$1
+  [ -d "$1" ] && find "$1" -maxdepth 1 -type f | wc -l || echo "Invalid Directory"
+
+}
+
+Create a script that will perform the following actions:
+
+    Delete all files contained in the directory specified by dirdel
+    Also delete the directory specified by dirdel
+
+function q1()
+{
+  #Valid Variables are:
+  dirdel=$1
+  rm -rf $1
+}
+
+Create a script that will perform the following actions:
+
+    Create a file specified by the name newfile.
+    Set the file modified date to the value specified in filedate and time to '1730'. NOTE: filedate contains only a valid date in YYYYMMDD format, not a time.
+
+function q1()
+{
+  #Valid Variables are:
+  newfile=$1
+  filedate=$2
+  touch -t "$2"1730 $1
+}
+
+
+Copy all lines from the file specified by src variable to the file specified by dst variable which DO NOT contain the text specified by match variable.
+
+
+function q1()
+{
+  #Valid Variables are:
+  src=$1
+  dst=$2
+  match=$3
+  grep -v "$match" "$src" > "$dst"
+
+}
+
+
+Terminate the process that has the randomly assigned name specified by procname variable. procname does not contain path information.
+
+function q1()
+{
+  #Valid Variables are:
+  procname=$1
+  pkill $1
+}
+
+
+Create a sorted full-path list of all files in the directory dirpath that were modified within the previous day. Directories should not be included in the output. Print the list to the screen, one item per line.
+
+NOTE: The full paths to files should be in your output. (i.e. /etc/passwd would be included)
+
+NOTE: Directory entries should not be included. (i.e. /etc would NOT be included)
+
+function q1()
+{
+  #Valid Variables are:
+  dirpath=$1
+  find "$dirpath" -type f -mtime -1 -print | sort
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
