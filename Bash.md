@@ -127,6 +127,7 @@ find
  find -ctime 2		changed 2 days ago
  find -mtime 2		modified 2 days ago
  find $HOME -mtime 0 	searches for files modified in last 24hrs in current-user home-dir
+
  find -cmin -30		changed last 30 minutes
  find -amin -60		accessed last hour
  find -mmin -60		modified in last hour
@@ -673,7 +674,13 @@ function q1()
 
 
 
-
+cont='cat $fname'
+if [[ $cont -lt 10 ]] ; then
+	echo single digit 
+elif [[ $cont -lt 100 ]] ; then
+	echo double digit
+ else Error 
+ fi 
 
 
 
