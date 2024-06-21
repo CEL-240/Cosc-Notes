@@ -682,9 +682,7 @@ elif [[ $cont -lt 100 ]] ; then
  else Error 
  fi 
 
-
-
-
+tar -czf
 
 
 
