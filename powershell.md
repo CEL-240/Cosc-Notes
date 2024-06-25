@@ -130,6 +130,7 @@ $output = "$var1 - $var2 = $sub"
 # Output the formatted string
 Write-Output $output
 
+# Create an array containing a range with a random starting and stopping point. The starting point will be a random number from -10 through 0. The ending point will be a random number from 1 through 20.
 '''
 # Generate random starting and stopping points
 $start = Get-Random -Minimum -10 -Maximum 1
@@ -142,6 +143,22 @@ $array = $start..$end
 Write-Output $array
 '''
 
+# Create a variable that contains the contents of the array in reverse
+
+Using the above example, your reversed array will be 2, 1, 0, -1, -2, -3
+
+# Generate random starting and stopping points
+$start = Get-Random -Minimum -10 -Maximum 1
+$end = Get-Random -Minimum 1 -Maximum 21
+
+# Create an array containing the range
+$array = $start..$end
+
+# Reverse the array
+$reversedArray = $array.Reverse()
+
+# Output the reversed array
+Write-Output $reversedArray
 
 
 
