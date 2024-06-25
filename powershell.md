@@ -222,7 +222,7 @@ employee1["Job"] = "software dev"
 
 # Get all running processes
 $processes = Get-Process | Where-Object { $_.StartTime -ne $null } | Sort-Object StartTime
-
+measure-object and select object are good to know 
 # Get the earliest and latest start time
 $earliestStartTime = $processes[0].StartTime
 $latestStartTime = $processes[-1].StartTime
@@ -265,6 +265,17 @@ Get-HotFix | Sort-Object InstalledOn | Select-Object InstalledOn, HotFixID
 Get-HotFix | Sort-Object InstalledOn, Description | Select-Object InstalledOn, HotFixID, Description
 
 ----------------------------------------------------------------------------------------
+
+# Create a custom object that contains information about the host system using the following:
+
+Win32_ComputerSystem
+
+Win32_BIOS
+
+Win32_OperatingSystem
+
+Win32_LogicalDisk
+
 
 
 
