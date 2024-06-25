@@ -6,6 +6,7 @@ Get-Process | Format-list #processess and formats into a list
 get-help <whatever youu need help w> -Examples or -Detailed, #'s are comments, <> allow multiline comments 
 
 # variables
+
 $var = 1makes $var 1
 $var | get-member shows methods and property
 $var.getype().name shows just the value of the type table ITS IMPORTANT 
@@ -147,6 +148,7 @@ Write-Output $array
 
 Using the above example, your reversed array will be 2, 1, 0, -1, -2, -3
 
+
 # Generate random starting and stopping points
 $start = Get-Random -Minimum -10 -Maximum 1
 $end = Get-Random -Minimum 1 -Maximum 21
@@ -154,13 +156,17 @@ $end = Get-Random -Minimum 1 -Maximum 21
 # Create an array containing the range
 $array = $start..$end
 
-# Reverse the array
-$reversedArray = $array.Reverse()
+# Initialize an empty array to store the reversed elements
+$reversedArray = @()
+
+# Iterate over the original array from end to start
+for ($i = $array.Length - 1; $i -ge 0; $i--) {
+    $reversedArray += $array[$i]
+}
 
 # Output the reversed array
 Write-Output $reversedArray
-
-
+## IF NO REVERSE METHOD 
 
 
 
