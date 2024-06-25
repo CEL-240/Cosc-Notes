@@ -179,6 +179,43 @@ done with ..
 
 properties have no () like .length but getype() is a method 
 
+##  day 2
+
+# pipeline
+get-process | get-member -membertype properties
+                                      methods 
+
+get-service | format-table name, status 
+
+get-service | where-object -property status -eq stopped #finds stopped processes can be combined with the line 188 pipe to format it with just names but only stopped processes 
+
+# super srrays/ hash table 
+
+$a = @{} 
+$a.getype()
+
+get-childitem 
+$cols = @{label="kb"; expression = { [int]($_.length/1kb)}}
+get-childitem | format-table name, $cols 
+
+function write-output-head {...}
+write-output-host "coors light"
+write-output-host "coors banquet"
+write-output-host "old 4-loko"
+write-output-host "yeungling"
+}
+
+write-host-head | sort gives just the 4 beers but host doesnt paasss and sort thjrough the pipline 
+write-output-head | sort has the function  go through the pipes 
+1..5 | sort-object 
+
+## hash excersise 
+$employee1 = [ordered]@{}
+$employee2 = @{}
+employee1.first = "mary"
+employee1["last"] = "hopper"
+employee1.ID = "001"
+employee1["Job"] = "software dev"
 
 
 
