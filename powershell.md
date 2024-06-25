@@ -49,7 +49,7 @@ get-command
 read host
 
 # Display a list of all running processes that start with the letter "s".
-Get-Process | Where-Object { $_.Name -like "s*" }
+Get-Process | -Name s* # c next to name for case sens
 
 # Find the cmdlet and its purpose for the following aliases:
 
@@ -70,7 +70,7 @@ ft = format-table
 Get-NetFirewallRule
 
 # Create a new alias called "gh" for the cmdlet "Get-Help"
-New-Alias -Name gh -Value Get-Help
+New-Alias -Name gh -Value Get-Help / set-alias gh get-help
 # create a array that holds random number between 25 and 50 
 $var1 = Get-Random -Minimum 25 -Maximum 51
 
@@ -142,7 +142,7 @@ $array = $start..$end
 
 # Output the array
 Write-Output $array
-'''
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 # Create a variable that contains the contents of the array in reverse
 
@@ -167,14 +167,17 @@ for ($i = $array.Length - 1; $i -ge 0; $i--) {
 # Output the reversed array
 Write-Output $reversedArray
 ## IF NO REVERSE METHOD 
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''----------------------------------------------------------------------------
+update-help updates the help system 
+get-help *processes* 
+output is for the pipeline and write host is for the terminal
 
+get-command -Noun *variable*
+` (backtic) is the escape character
+# range
+done with ..
 
-
-
-
-
-
-
+properties have no () like .length but getype() is a method 
 
 
 
