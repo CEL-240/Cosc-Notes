@@ -1,4 +1,4 @@
-# Day1/0
+# Day1/0 10.50.21.213
 ## ssh command
 This command will login to our linops as student:
 `ssh student@10.x.x.x -X`
