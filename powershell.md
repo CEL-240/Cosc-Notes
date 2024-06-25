@@ -6,7 +6,7 @@ Get-Process | Format-list #processess and formats into a list
 get-help <whatever youu need help w> -Examples or -Detailed, #'s are comments, <> allow multiline comments 
 
 # variables
-
+Display the start time of the earliest and latest running processes
 $var = 1makes $var 1
 $var | get-member shows methods and property
 $var.getype().name shows just the value of the type table ITS IMPORTANT 
@@ -216,12 +216,55 @@ employee1.first = "mary"
 employee1["last"] = "hopper"
 employee1.ID = "001"
 employee1["Job"] = "software dev"
+----------------------------------------------------------------------
 
+# Display the start time of the earliest and latest running processes
 
+# Get all running processes
+$processes = Get-Process | Where-Object { $_.StartTime -ne $null } | Sort-Object StartTime
 
+# Get the earliest and latest start time
+$earliestStartTime = $processes[0].StartTime
+$latestStartTime = $processes[-1].StartTime
 
+# Display the start times
+Write-Output "Earliest start time: $earliestStartTime"
+Write-Output "Latest start time: $latestStartTime"
 
+--------------------------------------------------------------------------
 
+# Identify a cmdlet that returns the current date and time then using this cmdlet and Select-object, display only the current day of the week
+
+# Get the current date and time
+$currentDateTime = Get-Date
+
+# Display only the current day of the week
+$currentDayOfWeek = $currentDateTime | Select-Object -ExpandProperty DayOfWeek
+
+# Output the current day of the week
+Write-Output "Current day of the week: $currentDayOfWeek"
+
+-----------------------------------------------------------------------------------------
+
+# Identify a cmdlet that displays a list of installed hotfixes.
+
+get-hotfix 
+
+----------------------------------------------------------------------------------------
+
+# Extend the expression to sort the list by install date, and display only the install date and hotfix ID.
+
+# Get and sort hotfixes by install date, display install date and hotfix ID
+Get-HotFix | Sort-Object InstalledOn | Select-Object InstalledOn, HotFixID
+
+----------------------------------------------------------------------------------------
+
+# Extend the expression further, but this time sort by description, include description, hotfix ID, and install Date.
+
+# Get and sort hotfixes by install date, display install date and hotfix ID
+Get-HotFix | Sort-Object InstalledOn, Description | Select-Object InstalledOn, HotFixID, Description
+
+----------------------------------------------------------------------------------------
 
 
 
