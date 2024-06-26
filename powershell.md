@@ -374,85 +374,37 @@ Query the processes
 
 Kill the processes from PowerShell
 
-# Define the list of applications to open
-$apps = @(
-    "notepad.exe",
-    "mspaint.exe",
-    "msedge.exe"
-)
+# Define the applications to open
+$applications = @("notepad.exe", "mspaint.exe", "msedge.exe")
 
-# Function to start the applications
-function Start-Applications {
-    param (
-        [string[]]$appList
-    )
-    foreach ($app in $appList) {
-        Start-Process $app
-        Start-Sleep -Seconds 1  # Give some time for the process to start
-    }
+# Open each application
+foreach ($app in $applications) {
+    Start-Process $app
+    Start-Sleep -Seconds 1 # Adding a slight delay to ensure the processes are started
 }
 
-# Function to query and return the processes by name
-function Get-AppProcesses {
-    param (
-        [string[]]$appList
-    )
-    $processes = @()
-    foreach ($app in $appList) {
-        $processes += Get-Process -Name ($app -replace ".exe", "") -ErrorAction SilentlyContinue
-    }
-    return $processes
+# Query the processes and save their Process IDs to a text file
+$processes = Get-Process | Where-Object { $_.Name -in $applications }
+$processes | Select-Object Id, ProcessName | Export-Csv -Path "procs.csv" -NoTypeInformation
+
+# Display processes information
+Write-Output "Processes started:"
+$processes | Format-Table Id, ProcessName, StartTime
+
+# Kill the processes
+$processes | ForEach-Object { Stop-Process -Id $_.Id -Force }
+
+# Confirm the processes are killed
+Start-Sleep -Seconds 1 # Adding a slight delay to ensure the processes are stopped
+$remainingProcesses = Get-Process | Where-Object { $_.Name -in $applications }
+
+if ($remainingProcesses) {
+    Write-Output "Failed to kill the following processes:"
+    $remainingProcesses | Format-Table Id, ProcessName
+} else {
+    Write-Output "All processes killed successfully."
 }
 
-# Function to save Process IDs to a file
-function Save-ProcessIds {
-    param (
-        [System.Diagnostics.Process[]]$processList,
-        [string]$filePath
-    )
-    $processList | ForEach-Object { $_.Id } | Out-File -FilePath $filePath -Force
-}
-
-# Function to kill processes from a file
-function Kill-ProcessesFromFile {
-    param (
-        [string]$filePath
-    )
-    $pids = Get-Content -Path $filePath
-    foreach ($pid in $pids) {
-        try {
-            Stop-Process -Id $pid -Force -ErrorAction Stop
-            Write-Output "Process $pid terminated successfully."
-        } catch {
-            Write-Output "Failed to terminate process $pid: $_"
-        }
-    }
-}
-
-# Start the applications
-Start-Applications -appList $apps
-
-# Give some time for the applications to start
-Start-Sleep -Seconds 5
-
-# Query the processes
-$processes = Get-AppProcesses -appList $apps
-
-# Output the processes found
-Write-Output "Processes to be terminated:"
-$processes | Format-Table -Property Id, ProcessName
-
-# Save Process IDs to a file
-$procFilePath = "$env:USERPROFILE\procs.txt"
-Save-ProcessIds -processList $processes -filePath $procFilePath
-
-Write-Output "Process IDs have been saved to $procFilePath."
-
-# Kill processes from the file
-Write-Output "Terminating processes from $procFilePath..."
-Kill-ProcessesFromFile -filePath $procFilePath
-
-Write-Output "Processes have been terminated."
 
 
 --------------------------------------------------------------------------------------------------
