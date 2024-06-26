@@ -729,35 +729,130 @@ $beer = 'spotted cow', 'left handed brewery', "knee deep", "coors light"
 $beer -ccontains "coors light"#second c on case is for case sense
 ---------------------------------------------------------------------------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Create an advanced function using Begin, Process, and End, that takes two(2) arguments. The first argument being an array of at least ten(10) integers and the second argument being a single integer. Search the array argument for every occurrence of the single integer argument then return the sum of all elements in the array excluding every occurrence of the single integer argument.
 
 
 
+function SumExcludingOccurrences {
+    param (
+        [int[]]$array,
+        [int]$excludeInteger
+    )
 
+    $sum = 0
+    foreach ($num in $array) {
+        if ($num -ne $excludeInteger) {
+            $sum += $num
+        }
+    }
 
+    return $sum
+}
 
+# Example usage
+$array = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+$excludeInteger = 5
+$result = SumExcludingOccurrences -array $array -excludeInteger $excludeInteger
+Write-Output "Sum of array excluding occurrences of $excludeInteger is: $result"
 
+----------------------------------------------------------------------------------------------------
 
+# Create an advanced function using Begin, Process, End, that prompts the user to enter the names of three(3) U.S. States then returns the names of the states in the order of longest name to shortest name and the amount of characters in each name. make it seem like a beginner wrote it
 
+function Get-StateNames {
+    [CmdletBinding()]
+    param ()
 
+    Begin {
+        Write-Output "Enter the names of three US states:"
+        $stateNames = @()
+    }
+
+    Process {
+        for ($i = 1; $i -le 3; $i++) {
+            $stateName = Read-Host "Enter State $i:"
+            $stateNames += $stateName
+        }
+    }
+
+    End {
+        $sortedStates = $stateNames | Sort-Object { $_.Length } -Descending
+        $stateLengths = $sortedStates | ForEach-Object { $_.Length }
+
+        Write-Output "States sorted from longest to shortest:"
+        for ($j = 0; $j -lt $sortedStates.Count; $j++) {
+            Write-Output "$($sortedStates[$j]) - $($stateLengths[$j]) characters"
+        }
+    }
+}
+
+# Call the function
+Get-StateNames
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Create a function that extracts your current IP, Subnet and Gateway and outputs them in the following format:
+
+Example
+PS> Get-netinfo
+IP: 192.168.0.1
+Subnet: 255.255.255.0
+Gateway: 192.168.1.1
+
+function Get-NetInfo {
+    # Retrieve network configuration
+    $networkConfig = Get-NetIPConfiguration | Where-Object { $_.IPv4DefaultGateway -ne $null }
+
+    # Extract IP, Subnet, and Gateway
+    $ip = $networkConfig.IPv4Address.IPAddress
+    $subnet = $networkConfig.IPv4SubnetMask.IPAddress
+    $gateway = $networkConfig.IPv4DefaultGateway.NextHop
+
+    # Output in desired format
+    Write-Output "IP: $ip"
+    Write-Output "Subnet: $subnet"
+    Write-Output "Gateway: $gateway"
+}
+
+# Call the function
+Get-NetInfo
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+# Create a function that extracts all the URLs found in the file "dns.txt" and outputs URLs, the amount of times the URL is found in the file and the total amount of URLs found.
+
+function Get-URLStats {
+    param (
+        [string]$filePath = "dns.txt"
+    )
+
+    # Read content of the file
+    try {
+        $content = Get-Content -Path $filePath -ErrorAction Stop
+    } catch {
+        Write-Output "Error reading file: $_"
+        return
+    }
+
+    # Define regex pattern to match URLs
+    $urlPattern = '(?i)\b(?:https?|ftp|file)://\S+'
+
+    # Find all URLs in the content
+    $urls = $content -split '\s' | Where-Object { $_ -match $urlPattern }
+
+    # Count occurrences of each URL
+    $urlCounts = $urls | Group-Object | Sort-Object -Property Count -Descending
+
+    # Output URLs, their counts, and total amount of URLs found
+    Write-Output "URLs found in $filePath:"
+    foreach ($url in $urlCounts) {
+        Write-Output "$($url.Name) - Count: $($url.Count)"
+    }
+    Write-Output "Total unique URLs found: $($urlCounts.Count)"
+}
+
+# Example usage
+Get-URLStats -filePath "dns.txt"
 
 
 
