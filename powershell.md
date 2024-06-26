@@ -4,7 +4,7 @@
 hit f8 for running a line and f for the whole script 
 Get-Process | Format-list #processess and formats into a list 
 get-help <whatever youu need help w> -Examples or -Detailed, #'s are comments, <> allow multiline comments 
-
+measure-object # counts 
 # variables
 Display the start time of the earliest and latest running processes
 $var = 1makes $var 1
@@ -277,16 +277,279 @@ Win32_OperatingSystem
 Win32_LogicalDisk
 
 
+# Retrieve information from Win32_ComputerSystem
+$computerSystem = Get-WmiObject -Class Win32_ComputerSystem
+$computerName = $computerSystem.Name
+$manufacturer = $computerSystem.Manufacturer
+$model = $computerSystem.Model
+$totalPhysicalMemory = [math]::round($computerSystem.TotalPhysicalMemory / 1GB, 2)  # Convert to GB and round to 2 decimal places
+
+# Retrieve information from Win32_BIOS
+$bios = Get-WmiObject -Class Win32_BIOS
+$biosVersion = $bios.SMBIOSBIOSVersion
+$biosManufacturer = $bios.Manufacturer
+
+# Retrieve information from Win32_OperatingSystem
+$operatingSystem = Get-WmiObject -Class Win32_OperatingSystem
+$osName = $operatingSystem.Caption
+$osVersion = $operatingSystem.Version
+$osArchitecture = $operatingSystem.OSArchitecture
+$installedDate = $operatingSystem.InstallDate
+
+# Retrieve information from Win32_LogicalDisk
+$logicalDisks = Get-WmiObject -Class Win32_LogicalDisk -Filter "DriveType=3"  # DriveType 3 corresponds to local disks
+$diskInfo = $logicalDisks | Select-Object DeviceID, VolumeName, @{Name="FreeSpace(GB)"; Expression={[math]::round($_.FreeSpace / 1GB, 2)}}, @{Name="Size(GB)"; Expression={[math]::round($_.Size / 1GB, 2)}}
+
+# Create a custom object with gathered information
+$systemInfo = [PSCustomObject]@{
+    ComputerName = $computerName
+    Manufacturer = $manufacturer
+    Model = $model
+    TotalPhysicalMemory_GB = $totalPhysicalMemory
+    BIOSVersion = $biosVersion
+    BIOSManufacturer = $biosManufacturer
+    OSName = $osName
+    OSVersion = $osVersion
+    OSArchitecture = $osArchitecture
+    InstalledDate = $installedDate
+    LogicalDisks = $diskInfo
+}
+
+# Output the custom object
+$systemInfo
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Find and extract the model number from the provided lines of text. If there isn’t a model number then display to the user that a model number wasn’t found
+
+ # Check both lines for model numbers and report individually the line and model number if found.
+
+# Define the lines of text
+$line1 = "Do you have model number: MT5437 for john.doe@sharklasers.com?"
+$line2 = "What model number for john.doe@sharklasers.com?"
+
+# Define a function to extract the model number using regex
+function Extract-ModelNumber {
+    param (
+        [string]$line
+    )
+    # Regular expression to match the model number format
+    $regex = "model number:\s*(\w+)"
+    if ($line -match $regex) {
+        return $matches[1]
+    }
+    return $null
+}
+
+# Extract model numbers from each line
+$modelNumber1 = Extract-ModelNumber -line $line1
+$modelNumber2 = Extract-ModelNumber -line $line2
+
+# Check and report the results
+if ($modelNumber1) {
+    Write-Output "Line 1: Model number found: $modelNumber1"
+} else {
+    Write-Output "Line 1: Model number not found"
+}
+
+if ($modelNumber2) {
+    Write-Output "Line 2: Model number found: $modelNumber2"
+} else {
+    Write-Output "Line 2: Model number not found"
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+# Part 1
+
+Use an array to iterate and open the following
+
+Notepad
+
+MS Edge
+
+MSpaint
+
+Query the processes
+
+Kill the processes from PowerShell
+
+# Define the list of applications to open
+$apps = @(
+    "notepad.exe",
+    "mspaint.exe",
+    "msedge.exe"
+)
+
+# Function to start the applications
+function Start-Applications {
+    param (
+        [string[]]$appList
+    )
+    foreach ($app in $appList) {
+        Start-Process $app
+        Start-Sleep -Seconds 1  # Give some time for the process to start
+    }
+}
+
+# Function to query and return the processes by name
+function Get-AppProcesses {
+    param (
+        [string[]]$appList
+    )
+    $processes = @()
+    foreach ($app in $appList) {
+        $processes += Get-Process -Name ($app -replace ".exe", "") -ErrorAction SilentlyContinue
+    }
+    return $processes
+}
+
+# Function to save Process IDs to a file
+function Save-ProcessIds {
+    param (
+        [System.Diagnostics.Process[]]$processList,
+        [string]$filePath
+    )
+    $processList | ForEach-Object { $_.Id } | Out-File -FilePath $filePath -Force
+}
+
+# Function to kill processes from a file
+function Kill-ProcessesFromFile {
+    param (
+        [string]$filePath
+    )
+    $pids = Get-Content -Path $filePath
+    foreach ($pid in $pids) {
+        try {
+            Stop-Process -Id $pid -Force -ErrorAction Stop
+            Write-Output "Process $pid terminated successfully."
+        } catch {
+            Write-Output "Failed to terminate process $pid: $_"
+        }
+    }
+}
+
+# Start the applications
+Start-Applications -appList $apps
+
+# Give some time for the applications to start
+Start-Sleep -Seconds 5
+
+# Query the processes
+$processes = Get-AppProcesses -appList $apps
+
+# Output the processes found
+Write-Output "Processes to be terminated:"
+$processes | Format-Table -Property Id, ProcessName
+
+# Save Process IDs to a file
+$procFilePath = "$env:USERPROFILE\procs.txt"
+Save-ProcessIds -processList $processes -filePath $procFilePath
+
+Write-Output "Process IDs have been saved to $procFilePath."
+
+# Kill processes from the file
+Write-Output "Terminating processes from $procFilePath..."
+Kill-ProcessesFromFile -filePath $procFilePath
+
+Write-Output "Processes have been terminated."
 
 
+--------------------------------------------------------------------------------------------------
 
+# Query the processes and display only the following information in order by process ID
 
+Process ID
 
+Process Name
 
+The time the process started
 
+The amount of time the process has spent on the processor
 
+The amount of memory assigned to the process
 
+# Define the list of applications to open
+$apps = @(
+    "notepad.exe",
+    "mspaint.exe",
+    "msedge.exe"  # Ensure Edge is installed and available in the system path
+)
 
+# Function to start the applications
+function Start-Applications {
+    param (
+        [string[]]$appList
+    )
+    foreach ($app in $appList) {
+        Start-Process $app
+    }
+}
+
+# Function to query and return the process information
+function Get-AppProcessesInfo {
+    param (
+        [string[]]$appList
+    )
+    $processInfo = @()
+    foreach ($app in $appList) {
+        $processes = Get-Process -Name ($app -replace ".exe", "")
+        foreach ($process in $processes) {
+            $info = [PSCustomObject]@{
+                ProcessID   = $process.Id
+                ProcessName = $process.ProcessName
+                StartTime   = $process.StartTime
+                CPUTime     = $process.TotalProcessorTime
+                MemoryUsage = $process.WorkingSet64
+            }
+            $processInfo += $info
+        }
+    }
+    return $processInfo
+}
+
+# Start the applications
+Start-Applications -appList $apps
+
+# Give some time for the applications to start
+Start-Sleep -Seconds 5
+
+# Query the process information
+$processInfo = Get-AppProcessesInfo -appList $apps
+
+# Sort the process information by Process ID
+$sortedProcessInfo = $processInfo | Sort-Object -Property ProcessID
+
+# Output the process information
+$sortedProcessInfo | Format-Table -Property ProcessID, ProcessName, StartTime, CPUTime, MemoryUsage
+
+# Save the process information to a text file
+$sortedProcessInfo | Out-File -FilePath "procs.txt"
+
+# Read the process information from the text file
+$savedProcessInfo = Get-Content -Path "procs.txt" | Out-String
+
+# Output the process information from the text file
+Write-Output $savedProcessInfo
+
+-----------------------------------------------------------------------------------------------------------------------
+
+# ge the ordinal date  and current date 
+
+function Get-OrdinalDate {
+    # Get the current date
+    $currentDate = Get-Date
+
+    # Get the ordinal date (day of the year)
+    $ordinalDate = $currentDate.DayOfYear
+
+    # Return the ordinal date
+    return $ordinalDate
+}
+
+# Call the function and output the result
+$ordinalDate = Get-OrdinalDate
+Write-Output "The ordinal date of today is: $ordinalDate"
 
 
 
