@@ -551,9 +551,55 @@ function Get-OrdinalDate {
 $ordinalDate = Get-OrdinalDate
 Write-Output "The ordinal date of today is: $ordinalDate"
 
+-------------------------------------------------------------------------------------------------------------------
 
+# Create a function that takes a number(n) as an argument and returns the square(n^2) of the number. 
 
+function Get-Square {
+    param (
+        [int]$n
+    )
 
+    # Calculate the square of the number
+    $square = $n * $n
+
+    # Return the square
+    return $square
+}
+
+# Example usage
+$n = 5
+$square = Get-Square -n $n
+Write-Output "The square of $n is: $square"
+
+----------------------------------------------------------------------------------------------------------
+
+# Create a function that takes three (3) arguments and returns the product of the arguments.
+
+function Get-Product {
+    param (
+        [int]$a,
+        [int]$b,
+        [int]$c
+    )
+
+    # Calculate the product of the three numbers
+    $product = $a * $b * $c
+
+    # Return the product
+    return $product
+}
+
+# Example usage
+$a = 2
+$b = 3
+$c = 4
+$product = Get-Product -a $a -b $b -c $c
+Write-Output "The product of $a, $b, and $c is: $product"
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Create a function that takes two(2) integer values, $a and $b, that are the lengths of two(2) legs of a right triangle and returns the length of the hypotenuse
 
 
 
