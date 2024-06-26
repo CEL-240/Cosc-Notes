@@ -854,6 +854,105 @@ function Get-URLStats {
 # Example usage
 Get-URLStats -filePath "dns.txt"
 
+---------------------------------------------------------------------------------------------------------------------------
+
+\
+# for each loops 
+$array = 1..5
+$sum = 0
+foreach ($item in $array){
+    $sum += $item 
+}
+
+--------------------------------------------------------------------------------------------------------------
+
+# while loops 
+$sum = 0
+whille($sum -lt 15) {
+    $sum
+    $sum += 1
+}
+
+$beer = ''
+while($beer -ne 'coors') {
+    $beers = read-host -prompt "what is the best beer?"
+}
+
+$num = 100
+do { 
+    $num 
+    $num += 1
+}while($num -lt 3)
+
+$num = 0
+do {
+    $num
+    $num += 1
+}until($num -gt 3)
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+# for loop 
+for ($num = 1; $num -le 3; $num ++)
+{
+    $num
+}
+
+-------------------------------------------------------------------------------------------------
+# file manipulation 
+allows to write to a file 
+set-content -path .\example.txt -value 'drink water' 
+add-content -path .\example.txt -value "gatorade is better"
+get-content .\example.txt 
+
+-------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
