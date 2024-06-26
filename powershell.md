@@ -601,8 +601,153 @@ Write-Output "The product of $a, $b, and $c is: $product"
 
 # Create a function that takes two(2) integer values, $a and $b, that are the lengths of two(2) legs of a right triangle and returns the length of the hypotenuse
 
+function Get-Hypotenuse {
+    param (
+        [int]$a,
+        [int]$b
+    )
+
+    # Calculate the square of the hypotenuse
+    $cSquare = [math]::Pow($a, 2) + [math]::Pow($b, 2)
+
+    # Calculate the length of the hypotenuse
+    $hypotenuse = [math]::Sqrt($cSquare)
+
+    # Return the length of the hypotenuse
+    return $hypotenuse
+}
+
+# Example usage
+$a = 3
+$b = 4
+$hypotenuse = Get-Hypotenuse -a $a -b $b
+Write-Output "The length of the hypotenuse for legs $a and $b is: $hypotenuse"
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+# Create a function that takes two(2) values, $a and $b, as two(2) angles in degrees of a triangle. Return the value of the missing angle.
+
+function Get-MissingAngle {
+    param (
+        [float]$a,
+        [float]$b
+    )
+
+    # Calculate the missing angle
+    $missingAngle = 180 - ($a + $b)
+
+    # Return the missing angle
+    return $missingAngle
+}
+
+# Example usage
+$a = 60
+$b = 80
+$missingAngle = Get-MissingAngle -a $a -b $b
+Write-Output "The missing angle for angles $a and $b is: $missingAngle"
+
+----------------------------------------------------------------------------------------------------
+
+# and returns the information in a hash table using the keys: first, last, age, and weight with the weight value converted to kilograms(kg) rounded to the nearest whole number
+
+function Get-UserInfo {
+    param (
+        [string]$first,
+        [string]$last,
+        [int]$age,
+        [float]$weight
+    )
+
+    # Convert weight from pounds to kilograms and round to the nearest whole number
+    $weightInKg = [math]::Round($weight * 0.45359237)
+
+    # Create a hash table with the user information
+    $userInfo = @{
+        first  = $first
+        last   = $last
+        age    = $age
+        weight = $weightInKg
+    }
+
+    # Return the hash table
+    return $userInfo
+}
+
+# Example usage
+$firstName = "John"
+$lastName = "Doe"
+$age = 30
+$weightInPounds = 180
+$userInfo = Get-UserInfo -first $firstName -last $lastName -age $age -weight $weightInPounds
+Write-Output $userInfo
+
+----------------------------------------------------------------------------------------------------
+# script block 
+$myblock = { get-service | format-table name, status }
+
+invoke-command $myblock
+&$myblock
+
+$a = @()
+$b = {1+1}
+
+$a += &$b #& is invoking b
+----------------------------------------------------------------------------------------------------
+get-process | group-object {$_.name.substring(0,1).toupper()} | foreach-object
+{($_.name) + " "} * 7; "=============="; $_.group}
+#groups by firs letter of process name and makes the group uppercase 
+# fore each obj
+
+---------------------------------------------------------------------------------------------------------
+
+get-process | sort-object starttime | select-object -first 10 | ft processname, starttime
+| select-object -expandproperty name 
+
+-------------------------------------------------------------------------------------------------------
+
+# comparison operators 
+1..5 -eq 2 returns what is true out of the range 
+"abc" -eq "abc" double quotes are used for strings 
+# i is case insense and cis case sense, -ieq or -ceq
+
+-------------------------------------------------------------------------------------
+
+# like
+"powershell", "server" -like(or -notlike) "*shell"
+
+$txt = 'here is the model: MO354'
+$pattern = 'MO(\d{3})'
+$txt -match $pattern
+
+$matches[0] gives the model number btu 1 would give numbers also -match uses REGEX PATTERNS
+
+---------------------------------------------------------------------------------------------------------
+
+# contains
+
+$beer = 'spotted cow', 'left handed brewery', "knee deep", "coors light" 
+$beer -ccontains "coors light"#second c on case is for case sense
+---------------------------------------------------------------------------------------------------
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Create an advanced function using Begin, Process, and End, that takes two(2) arguments. The first argument being an array of at least ten(10) integers and the second argument being a single integer. Search the array argument for every occurrence of the single integer argument then return the sum of all elements in the array excluding every occurrence of the single integer argument.
 
 
 
