@@ -715,37 +715,21 @@ Write-Output "Sum of array excluding occurrences of $excludeInteger is: $result"
 
 ----------------------------------------------------------------------------------------------------
 
-# Create an advanced function using Begin, Process, End, that prompts the user to enter the names of three(3) U.S. States then returns the names of the states in the order of longest name to shortest name and the amount of characters in each name. make it seem like a beginner wrote it
+# Create an advanced function using Begin, Process, End, that prompts the user to enter the names of three(3) U.S. States then returns the names of the states in the order of longest name to shortest name and the amount of characters in each name.
 
-function Get-StateNames {
+
+function Get-StatesByLength {
     [CmdletBinding()]
     param ()
 
-    Begin {
-        Write-Output "Enter the names of three US states:"
-        $stateNames = @()
-    }
-
-    Process {
-        for ($i = 1; $i -le 3; $i++) {
-            $stateName = Read-Host "Enter State $i:"
-            $stateNames += $stateName
-        }
-    }
-
-    End {
-        $sortedStates = $stateNames | Sort-Object { $_.Length } -Descending
-        $stateLengths = $sortedStates | ForEach-Object { $_.Length }
-
-        Write-Output "States sorted from longest to shortest:"
-        for ($j = 0; $j -lt $sortedStates.Count; $j++) {
-            Write-Output "$($sortedStates[$j]) - $($stateLengths[$j]) characters"
-        }
-    }
+    Begin { $states = @() }
+    Process { 1..3 | ForEach-Object { $states += Read-Host "Enter the name of state $_" } }
+    End { $states | Sort-Object Length -Descending | ForEach-Object { "$_ - $($_.Length) characters" } }
 }
 
 # Call the function
-Get-StateNames
+Get-StatesByLength
+
 
 --------------------------------------------------------------------------------------------------------------------------------------------------
 
