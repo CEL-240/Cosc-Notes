@@ -763,38 +763,40 @@ Get-NetInfo
 
 # Create a function that extracts all the URLs found in the file "dns.txt" and outputs URLs, the amount of times the URL is found in the file and the total amount of URLs found.
 
-function Get-URLStats {
+function Get-URLsFromFile {
     param (
-        [string]$filePath = "dns.txt"
+        [string]$FilePath = "dns.txt"
     )
 
-    # Read content of the file
-    try {
-        $content = Get-Content -Path $filePath -ErrorAction Stop
-    } catch {
-        Write-Output "Error reading file: $_"
+    # Check if file exists
+    if (-Not (Test-Path -Path $FilePath)) {
+        Write-Host "File not found."
         return
     }
 
-    # Define regex pattern to match URLs
-    $urlPattern = '(?i)\b(?:https?|ftp|file)://\S+'
+    # Read the file content
+    $content = Get-Content -Path $FilePath
 
-    # Find all URLs in the content
-    $urls = $content -split '\s' | Where-Object { $_ -match $urlPattern }
+    # Extract URLs
+    $urls = $content | Select-String -Pattern "http[s]?://\S+" -AllMatches | ForEach-Object { $_.Matches.Value }
+    
+    # Check if there are any URLs found
+    if ($urls.Count -eq 0) {
+        Write-Host "No URLs found in the file."
+        return
+    }
 
     # Count occurrences of each URL
-    $urlCounts = $urls | Group-Object | Sort-Object -Property Count -Descending
+    $urlCounts = $urls | Group-Object | Select-Object Name, Count
 
-    # Output URLs, their counts, and total amount of URLs found
-    Write-Output "URLs found in $filePath:"
-    foreach ($url in $urlCounts) {
-        Write-Output "$($url.Name) - Count: $($url.Count)"
-    }
-    Write-Output "Total unique URLs found: $($urlCounts.Count)"
+    # Output results
+    $urlCounts | ForEach-Object { Write-Host "$($_.Name) - $($_.Count) times" }
+    Write-Host "Total URLs found: $($urls.Count)"
 }
 
-# Example usage
-Get-URLStats -filePath "dns.txt"
+# Call the function
+Get-URLsFromFile
+
 
 ---------------------------------------------------------------------------------------------------------------------------
 
