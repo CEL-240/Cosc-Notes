@@ -503,6 +503,12 @@ function Get-OrdinalDate {
 $ordinalDate = Get-OrdinalDate
 Write-Output "The ordinal date of today is: $ordinalDate"
 
+function get-ordinaldate {
+    $date=(get-date).dayofyear
+    $year                .year
+    write-host $year"-"$date
+}
+
 -------------------------------------------------------------------------------------------------------------------
 
 # Create a function that takes a number(n) as an argument and returns the square(n^2) of the number. 
@@ -864,14 +870,39 @@ get-content .\example.txt
 
 ## for elements provided on the pipeline 
 
+function process-block{ 
+param(define)
+}
 
+function print-psitem{
+begin {code} #optional 
+process {foreach($i in $_){
+    $_
+    $i}
+}
+end {code} #optional
+}
 
+function print-input {
+    foreach($i in $input){$i}
+    $_
+    $i}
 
+function add-nums {
+begin {$sum = 0}
+process {$sum += $_}
+end {$sum}
+}
 
+$beer = "coors", "guiness", "blue moon", "corona"
 
+function get-groceries {
+begin {]
+process {add-content -path .\example.txt -value $_}
+end {}
+}
 
-
-
+$beer | get-groceries
 
 
 
