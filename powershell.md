@@ -876,7 +876,7 @@ function print-input {
 
 function add-nums {
 begin {$sum = 0}
-process {$sum += $_}
+process {$sum1, 2, 3, 4, 5 | Sum-Pipeline
 end {$sum}
 }
 
@@ -913,14 +913,113 @@ $beer | get-groceries
 # match 
 'powershell is cool!' -match '\w+(\?|!)'
 
+
+
 $ip = (ipconfig) -match "ipv4"
 $ip.gettype()
 $ip -match "\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}" #loooks for ips valid and invalid
 
 -------------------------------------------------------------------------------------------------------------
 
+## practice zest
+
+<# 1 #>
+function q1($var1,$var2,$var3,$var4) {
+    <# Return the product of the arguments #>
+  return $var1 * $var2 * $var3 * $var4
+  }
+
+function q2($arr,$rows,$cols,$key) {
+    <# Search the 2 dimensional array for the first occurance of key at column index 0
+       and return the value at column index 9 of the same row.
+       Return -1 if the key is not found.
+    #>
+    foreach($i in $arr){
+        if ($i[0] -eq $key){
+            return $i[9]
+        }
+    }
+    return -1
+}
+
+function q3 {
+    <# In a loop, prompt the user to enter positive integers one at time.
+       Stop when the user enters a -1. Return the maximum positive
+       value that was entered."
+	#>
+  function Get-MaxPositiveValue {
+    $maxValue = -1
+
+    while ($true) {
+        $inputValue = Read-Host "Enter a positive integer (enter -1 to stop):"
+
+        if ($inputValue -eq "-1") {
+            break
+        }
+
+        $intValue = [int]$inputValue
+
+        if ($intValue -gt $maxValue) {
+            $maxValue = $intValue
+        }
+    }
+
+    return $maxValue
+}
+
+# Example usage:
+Get-MaxPositiveValue
+
+}       
+function q4($filename,$whichline) {
+    <# Return the line of text from the file given by the `$filename
+	   argument that corresponds to the line number given by `$whichline.
+	   The first line in the file corresponds to line number 0."
+	#>
+get-content $filename | Select-Object -Index $whichline
+}
+function q5($path) {
+    <# Return the child items from the given path sorted
+       ascending by their Name
+	#>
+    Get-ChildItem $path | Sort-Object
+}
+function q6 {
+    <# Return the sum of all elements provided on the pipeline
+	#>
+$sum =  0
+	$input | foreach { $sum += $_ }
+	$sum
+}
+    
+       
+function q7 {
+	<# Return only those commands whose noun is process #>
+Get-Command -Noun process
+
+}
+function q8($adjective) {
+    <# Return the string 'PowerShell is ' followed by the adjective given
+	   by the `$adjective argument
+	#>    
+echo "PowerShell is $adjective"
+}
+function q9($addr) {
+	<# Return `$true when the given argument is a valid IPv4 address,
+	   otherwise return `$false. For the purpose of this function, regard
+	   addresses where all octets are in the range 0-255 inclusive to
+	   be valid.
+	#>
+$pattern = "^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$"
+	$addr -match $pattern
+
+}
+function q10 ($filepath,$lasthash) {
+ <# Return `$true if the contents of the file given in the
+       `$filepath argument have changed since `$lasthash was
+       computed. `$lasthash is the previously computed SHA256
+       hash (as a string) of the contents of the file. #>
 
 
-
-
+}
 
