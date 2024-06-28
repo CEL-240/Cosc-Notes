@@ -1014,12 +1014,25 @@ $pattern = "^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0
 	$addr -match $pattern
 
 }
+
+ORRRR  
+
+foreach($oct in $addr.split('.')){
+	if([int]$oct -lt 0 -or [int]$oct
+
+
+
+
 function q10 ($filepath,$lasthash) {
  <# Return `$true if the contents of the file given in the
        `$filepath argument have changed since `$lasthash was
        computed. `$lasthash is the previously computed SHA256
        hash (as a string) of the contents of the file. #>
-
+	
+ $hash = get-filehash -algorithm sha256 $filepath 
+ return $hash.hash -ne $lasthash	
 
 }
+
+##	GATHERS
 
