@@ -1216,12 +1216,11 @@ function q9($addr) {
 
     $ip = [System.Net.IPAddress]::Parse($addr)
     
-    # Convert IP addresses to bytes for comparison
+
     $ipBytes = $ip.GetAddressBytes()
     $startIp = [System.Net.IPAddress]::Parse("240.0.0.0").GetAddressBytes()
     $endIp = [System.Net.IPAddress]::Parse("254.255.255.255").GetAddressBytes()
-
-    # Compare each byte from most significant to least significant
+    
     $inRange = $true
     for ($i = 0; $i -lt $ipBytes.Length; $i++) {
         if ($ipBytes[$i] -lt $startIp[$i] -or $ipBytes[$i] -gt $endIp[$i]) {
