@@ -4,6 +4,8 @@ my ip is 10.50.33.31 xfreerdp /u:student /v:10.50.33.31 -dynamic-resolution +gly
 htt://10.50.22.197:8000/
 M24005
 password
+KYGA-M-005
+
 
 --------------------------------------------------
 https://os.cybbh.io/public/os/latest/index.html
