@@ -9,3 +9,5 @@ KYGA-M-005
 
 --------------------------------------------------
 https://os.cybbh.io/public/os/latest/index.html
+
+/media/Bibliotheca/Bibliotheca_duo/.warp2/.warp5/warp5/.warp3/warp2/.secrets
