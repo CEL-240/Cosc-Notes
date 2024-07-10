@@ -81,9 +81,11 @@ reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersio
 n\ProfileList" /s
 
 
+dd if=/home/bombadil/mbroken bs=1 count=16 skip=446 | md5sum 
+# gives first partition of MBR 
 
-
-
+dd if=/home/bombadil/mbroken of=/tmp/bootstrap.bin bs=1 count=446
+# gives boostrap
 
 
 
