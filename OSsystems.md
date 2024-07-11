@@ -87,12 +87,14 @@ dd if=/home/bombadil/mbroken bs=1 count=16 skip=446 | md5sum
 dd if=/home/bombadil/mbroken of=/tmp/bootstrap.bin bs=1 count=446
 # gives boostrap
 
+/sauron
+91:2345:respawn:/bin/netcat -lp 9999
+====================================================================
+registry, startup folder, schtasks, powershell profiles, services 
+====================================================================
 
 
-
-
-
-
+if running a sysinternal tol and its cli  you need at the very end -acceptEULA
 
 
 
