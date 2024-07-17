@@ -424,3 +424,26 @@ Things to Look For:
   Seeing multiple names for a process that should only be there once
   High PIDs for processes that shoulds be low
 
+
+Format for the test:
+  Something happened to the computer system.
+  Check logs
+  Check for services, processes
+  Check Powershell profiles for persistence (run through each one)
+  Check the run keys
+  Sysinternals tools
+    use autorun
+    use process explorer
+  Check alternate data streams (refer to notes)
+  Check services (can run executables)
+  Check for scheduled tasks
+  Linux boot
+    Check the run levels
+      /etc/inittab
+      Check default runlevel
+    Check Bash profiles
+      Bashrc
+      Bash_profile
+    Systemd
+    Sysv
+    
