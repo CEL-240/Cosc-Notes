@@ -449,18 +449,20 @@ Format for the test:
     use autorun ##Type *autoruns -accepteula*
     use process explorer
     
-  Check alternate data streams (refer to notes) ##
+  Check alternate data streams (refer to notes) ## Get-Item * -Stream  might be useful 
   
-  Check services (can run executables) ##
+  Check services (can run executables) ## systemctl --type=service --state=running shows running services and ps aux lists every process
   
-  Check for scheduled tasks ##
-  
+  Check for scheduled tasks ##ls /etc/cron.d/
+                              ls /etc/cron.daily/ 
+                              schtasks for windows schtasks /query /fo LIST /v for detail
+
   Linux boot
-    Check the run levels ##
+    Check the run levels ##/etc/inittab
       /etc/inittab
-      Check default runlevel ##
+      Check default runlevel ## ls -lisa /lib/systemd/system/default.target
       
-    Check Bash profiles ##
+    Check Bash profiles ##cat /etc/profile or profile.d, 
       Bashrc
       Bash_profile
     
