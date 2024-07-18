@@ -427,23 +427,43 @@ Things to Look For:
 
 Format for the test:
   Something happened to the computer system.
-  Check logs
-  Check for services, processes
-  Check Powershell profiles for persistence (run through each one)
-  Check the run keys
-  Sysinternals tools
-    use autorun
+  
+  Check logs ##
+  
+  Check for services, processes ## HKLM\SYSTEM\CurrentControlSet\Services is the key for services, Procexp or Tasklist /v /fo table for proceses
+  
+  Check Powershell profiles for persistence (run through each one) ## Current User, Current Host - $PROFILE
+                                                                      Current User, Current Host - $PROFILE.CurrentUserCurrentHost
+                                                                      Current User, All Hosts - $PROFILE.CurrentUserAllHosts
+                                                                      All Users, Current Host - $PROFILE.AllUsersCurrentHost
+                                                                      All Users, All Hosts - $PROFILE.AllUsersAllHosts
+  
+  Check the run keys ## use powershell: Get-ChildItem HK##:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run | runonce
+                                        HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run
+                                        HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce
+                                        HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+                                        HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce
+
+  
+  Sysinternals tools ## net use * http://live.sysinternals.com
+    use autorun ##Type *autoruns -accepteula*
     use process explorer
-  Check alternate data streams (refer to notes)
-  Check services (can run executables)
-  Check for scheduled tasks
+    
+  Check alternate data streams (refer to notes) ##
+  
+  Check services (can run executables) ##
+  
+  Check for scheduled tasks ##
+  
   Linux boot
-    Check the run levels
+    Check the run levels ##
       /etc/inittab
-      Check default runlevel
-    Check Bash profiles
+      Check default runlevel ##
+      
+    Check Bash profiles ##
       Bashrc
       Bash_profile
+    
     Systemd
     Sysv
     
