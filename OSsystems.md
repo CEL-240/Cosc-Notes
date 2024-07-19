@@ -13,7 +13,7 @@ DAY 1
 *POWERSHELL*
 /> Execution-policy 
   # allows to run scripts based on what the setting is.
-/> $PROFILE 
+/> $PROFILE =================================================================================
   # this is where persistence can be set
   # supports several profile files and host programs like windows. (Below are the locations of each profile)
   > $PsHome\Profile.ps1 - All Users, All Hosts
@@ -64,11 +64,11 @@ $PROFILE | Format-List -Force
 
 DAY 2
 ------------------------------------
-HKEY_LOCAL_MACHINE (HKLM)
+HKEY_LOCAL_MACHINE (HKLM)=============================================================
   # Hardware, Sam, Security, System
 HKEY_USERS (HKU)
   # Contains environement settings, Shortcuts, and File Associations
-HKEY_CURRENT_USERS (HKCU)
+HKEY_CURRENT_USERS (HKCU)=============================================================
   # symbolic link of logged in users. (SID) 
 HKEY_CURRENT_CONFIG (HKCC)
   # symbolic link to the current configurations
@@ -425,47 +425,48 @@ Things to Look For:
   High PIDs for processes that shoulds be low
 
 
-Format for the test:
-  Something happened to the computer system.
+review ***************
+
+Check logs ##
+
+Check for services, processes ## HKLM\SYSTEM\CurrentControlSet\Services is the key for services, Procexp or Tasklist /v /fo table for proceses
+Get-Ciminstance Win32_service | Select Name, Processid, Pathname | more ##is really good here, netstat -anob for connections
   
-  Check logs ##
-  
-  Check for services, processes ## HKLM\SYSTEM\CurrentControlSet\Services is the key for services, Procexp or Tasklist /v /fo table for proceses
-  
-  Check Powershell profiles for persistence (run through each one) ## Current User, Current Host - $PROFILE
+Check Powershell profiles for persistence (run through each one) ## Current User, Current Host - $PROFILE
                                                                       Current User, Current Host - $PROFILE.CurrentUserCurrentHost
                                                                       Current User, All Hosts - $PROFILE.CurrentUserAllHosts
                                                                       All Users, Current Host - $PROFILE.AllUsersCurrentHost
                                                                       All Users, All Hosts - $PROFILE.AllUsersAllHosts
   
-  Check the run keys ## use powershell: Get-ChildItem HK##:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run | runonce
+Check the run keys ## use powershell: Get-ChildItem/Item HK##:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run | runonce
                                         HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run
                                         HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce
                                         HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
                                         HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce
 
   
-  Sysinternals tools ## net use * http://live.sysinternals.com
+Sysinternals tools ## net use * http://live.sysinternals.com
     use autorun ##Type *autoruns -accepteula*
     use process explorer
     
-  Check alternate data streams (refer to notes) ## Get-Item * -Stream  might be useful 
+check alternate data streams (refer to notes) ## Get-Item * -Stream  might be useful 
   
-  Check services (can run executables) ## systemctl --type=service --state=running shows running services and ps aux lists every process
+Check services (can run executables) ## systemctl --type=service --state=running shows running services and ps aux lists every process
   
-  Check for scheduled tasks ##ls /etc/cron.d/
+Check for scheduled tasks ##ls /etc/cron.d/
                               ls /etc/cron.daily/ 
                               schtasks for windows schtasks /query /fo LIST /v for detail
 
-  Linux boot
+Linux boot
     Check the run levels ##/etc/inittab
-      /etc/inittab
+    
+/etc/inittab
       Check default runlevel ## ls -lisa /lib/systemd/system/default.target
       
-    Check Bash profiles ##cat /etc/profile or profile.d, 
+Check Bash profiles ##cat /etc/profile or profile.d, 
       Bashrc
       Bash_profile
     
-    Systemd
-    Sysv
+Systemd
+Sysv
     
