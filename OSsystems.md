@@ -449,9 +449,9 @@ Sysinternals tools ## net use * http://live.sysinternals.com
     use autorun ##Type *autoruns -accepteula*
     use process explorer
     
-check alternate data streams (refer to notes) ## Get-Item * -Stream  might be useful 
+check alternate data streams ## Get-Item * -Stream  might be useful 
   
-Check services (can run executables) ## systemctl --type=service --state=running shows running services and ps aux lists every process
+Check services ## systemctl --type=service --state=running shows running services and ps aux lists every process
   
 Check for scheduled tasks ##ls /etc/cron.d/
                               ls /etc/cron.daily/ 
