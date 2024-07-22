@@ -426,48 +426,5 @@ Things to Look For:
   High PIDs for processes that shoulds be low
 
 
-review ***************
 
-Check logs ##
-
-Check for services, processes ## HKLM\SYSTEM\CurrentControlSet\Services is the key for services, Procexp or Tasklist /v /fo table for proceses
-Get-Ciminstance Win32_service | Select Name, Processid, Pathname | more ##is really good here, netstat -anob for connections
-  
-Check Powershell profiles for persistence (run through each one) ## Current User, Current Host - $PROFILE
-                                                                      Current User, Current Host - $PROFILE.CurrentUserCurrentHost
-                                                                      Current User, All Hosts - $PROFILE.CurrentUserAllHosts
-                                                                      All Users, Current Host - $PROFILE.AllUsersCurrentHost
-                                                                      All Users, All Hosts - $PROFILE.AllUsersAllHosts
-  
-Check the run keys ## use powershell: Get-ChildItem/Item HK##:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run | runonce
-                                        HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run
-                                        HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce
-                                        HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
-                                        HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce
-
-  
-Sysinternals tools ## net use * http://live.sysinternals.com
-    use autorun ##Type *autoruns -accepteula*
-    use process explorer
-    
-check alternate data streams ## Get-Item * -Stream  might be useful 
-  
-Check services ## systemctl --type=service --state=running shows running services and ps aux lists every process
-  
-Check for scheduled tasks ##ls /etc/cron.d/
-                              ls /etc/cron.daily/ 
-                              schtasks for windows schtasks /query /fo LIST /v for detail
-
-Linux boot
-    Check the run levels ##/etc/inittab
-    
-/etc/inittab
-      Check default runlevel ## ls -lisa /lib/systemd/system/default.target
-      
-Check Bash profiles ##cat /etc/profile or profile.d, 
-      Bashrc
-      Bash_profile
-    
-Systemd
-Sysv
-    
+          
